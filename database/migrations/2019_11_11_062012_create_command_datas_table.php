@@ -15,6 +15,7 @@ class CreateCommandDatasTable extends Migration
     {
         Schema::create('command_datas', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('device_id');
             $table->string('array_lat');
             $table->string('array_lon');
             $table->string('kategori');

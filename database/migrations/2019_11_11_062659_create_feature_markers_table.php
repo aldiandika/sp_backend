@@ -15,6 +15,7 @@ class CreateFeatureMarkersTable extends Migration
     {
         Schema::create('feature_markers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('device_id');
             $table->string('m_lat');
             $table->string('m_lon');
             $table->string('kategori');

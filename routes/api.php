@@ -25,3 +25,7 @@ Route::post('/map', function (Request $request) {
     event(new SendLocation($location));
     return response()->json(['status' => 'success', 'data' => $location]);
 });
+
+Route::post('/sendloc', 'FleetTrackerAPI@store');
+
+Route::get('/tracklast', 'FleetTrackerAPI@showTracklast');

@@ -15,8 +15,9 @@ class CreateTrackersTable extends Migration
     {
         Schema::create('trackers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('device_id');
             $table->string('t_lat');
-            $table->string('t-lon');
+            $table->string('t_lon');
             $table->string('kategori');
             $table->timestamps();
         });
