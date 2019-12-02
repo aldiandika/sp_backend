@@ -14,18 +14,24 @@ use App\Events\SendLocation;
 |
 */
 
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/map', function (Request $request) {
+Route::post('/sendloc', function (Request $request) {
+    $dId = $request->input('id');
+    $device = $request->input('dev');
     $lat = $request->input('lat');
     $long = $request->input('long');
-    $location = ["lat" => $lat, "long" => $long];
+    $location = ["deviceId" => $dId, "device" => $device, "lat" => $lat, "long" => $long];
     event(new SendLocation($location));
     return response()->json(['status' => 'success', 'data' => $location]);
 });
 
-Route::post('/sendloc', 'FleetTrackerAPI@store');
+Route::post('/map', 'FleetTrackerAPI@store');
 
 Route::get('/tracklast', 'FleetTrackerAPI@showTracklast');
