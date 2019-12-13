@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use App\Events\SendLocation;
 
+use App\Tracker;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,6 +31,16 @@ Route::post('/sendloc', function (Request $request) {
     $long = $request->input('long');
     $location = ["deviceId" => $dId, "device" => $device, "lat" => $lat, "long" => $long];
     event(new SendLocation($location));
+    
+
+    //Untuk Testing tanpa internet
+    // $devTracker = new Tracker;
+    // $devTracker->device_id = $dId;
+    // $devTracker->t_lat = $lat;
+    // $devTracker->t_lon = $long;
+    // $devTracker->kategori = $device;
+    // $devTracker->save();
+
     return response()->json(['status' => 'success', 'data' => $location]);
 });
 
